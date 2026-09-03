@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300" fill="none">
+  <rect width="400" height="300" fill="#E2E8F0"/>
+  <path d="M160 110C160 121.046 151.046 130 140 130C128.954 130 120 121.046 120 110C120 98.9543 128.954 90 140 90C151.046 90 160 98.9543 160 110Z" fill="#94A3B8"/>
+  <path d="M100 210L160 150L210 200L260 140L300 210H100Z" fill="#94A3B8"/>
+  <text x="200" y="245" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" fill="#64748B" text-anchor="middle">SmartGov Market Item</text>
+</svg>

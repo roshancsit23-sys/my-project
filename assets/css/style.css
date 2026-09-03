@@ -1,0 +1,940 @@
+/* =========================================================
+   SmartGov Market - Modern Custom Stylesheet
+   File: assets/css/style.css
+   ========================================================= */
+
+/* =========================================================
+   ROOT VARIABLES
+   ========================================================= */
+
+:root {
+    --primary-color: #2563eb;
+    --primary-dark: #1d4ed8;
+    --primary-gradient: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+
+    --gov-navy: #0b1d3a;
+    --gov-navy-dark: #061225;
+    --gov-gold: #f5c451;
+    --gov-gold-deep: #e8a317;
+
+    --accent-emerald: #10b981;
+    --accent-teal: #0d9488;
+
+    --bg-light: #f4f7fb;
+    --bg-page: #eef2f7;
+    --text-dark: #1e293b;
+    --text-muted: #64748b;
+
+    --radius-sm: 10px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+
+    --card-shadow:
+        0 1px 2px rgba(15, 23, 42, 0.04),
+        0 8px 24px rgba(15, 23, 42, 0.06);
+
+    --hover-shadow:
+        0 12px 32px rgba(37, 99, 235, 0.18);
+}
+
+
+/* =========================================================
+   GLOBAL
+   ========================================================= */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+
+    background:
+        radial-gradient(1200px 400px at 10% -10%, rgba(37, 99, 235, 0.08), transparent 50%),
+        radial-gradient(800px 300px at 100% 0%, rgba(245, 196, 81, 0.08), transparent 40%),
+        var(--bg-page);
+
+    color: var(--text-dark);
+    letter-spacing: -0.01em;
+
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    margin: 0;
+}
+
+main {
+    flex: 1;
+}
+
+a {
+    transition: all 0.2s ease;
+}
+
+
+/* =========================================================
+   SMARTGOV NAVBAR
+   ========================================================= */
+
+.navbar-smartgov {
+    background: rgba(11, 29, 58, 0.92) !important;
+
+    color: #ffffff !important;
+
+    min-height: 70px;
+
+    padding: 0.75rem 1rem;
+
+    border-bottom: 1px solid rgba(245, 196, 81, 0.25);
+
+    box-shadow: 0 8px 32px rgba(6, 18, 37, 0.28);
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 1050;
+
+    backdrop-filter: blur(18px) saturate(1.2);
+}
+
+
+/* Navbar Container */
+
+.navbar-smartgov .container,
+.navbar-smartgov .container-fluid {
+    min-height: 55px;
+}
+
+
+/* Navbar Brand */
+
+.navbar-smartgov .navbar-brand {
+    color: #ffffff !important;
+
+    font-weight: 700;
+
+    font-size: 1.25rem;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 0.5rem;
+
+    text-decoration: none;
+}
+
+.navbar-smartgov .navbar-brand:hover {
+    color: var(--gov-gold) !important;
+}
+
+
+/* Brand Badge */
+
+.brand-badge {
+    background: linear-gradient(135deg, #f5c451, #e8a317);
+
+    color: #1a2b4c !important;
+
+    font-weight: 700;
+
+    padding: 0.2rem 0.65rem;
+
+    border-radius: 999px;
+
+    font-size: 0.75rem;
+
+    letter-spacing: 0.04em;
+
+    display: inline-block;
+
+    box-shadow: 0 2px 8px rgba(232, 163, 23, 0.4);
+}
+
+
+/* Navbar Links */
+
+.navbar-smartgov .navbar-nav {
+    align-items: center;
+}
+
+.navbar-smartgov .navbar-nav .nav-link {
+    color: #ffffff !important;
+
+    font-weight: 500;
+
+    padding: 0.6rem 0.9rem !important;
+
+    margin: 0 0.15rem;
+
+    border-radius: 8px;
+
+    transition: all 0.2s ease;
+}
+
+.navbar-smartgov .navbar-nav .nav-link:hover,
+.navbar-smartgov .navbar-nav .nav-link.active {
+    color: #ffffff !important;
+
+    background: linear-gradient(135deg, rgba(245, 196, 81, 0.2), rgba(37, 99, 235, 0.25));
+
+    transform: translateY(-1px);
+}
+
+.navbar-smartgov .navbar-nav .nav-link.active {
+    font-weight: 600;
+}
+
+
+/* Navbar Toggler */
+
+.navbar-smartgov .navbar-toggler {
+    border: 1px solid rgba(255, 255, 255, 0.6);
+
+    padding: 0.45rem 0.65rem;
+
+    border-radius: 8px;
+}
+
+.navbar-smartgov .navbar-toggler:focus {
+    box-shadow:
+        0 0 0 0.2rem rgba(255, 255, 255, 0.2);
+}
+
+.navbar-smartgov .navbar-toggler-icon {
+    filter: brightness(0) invert(1);
+}
+
+
+/* Navbar Dropdown */
+
+.navbar-smartgov .dropdown-menu {
+    border: none;
+
+    border-radius: var(--radius-sm);
+
+    padding: 0.5rem;
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.navbar-smartgov .dropdown-item {
+    border-radius: 7px;
+
+    padding: 0.65rem 1rem;
+
+    color: #334155;
+}
+
+.navbar-smartgov .dropdown-item:hover {
+    background: rgba(37, 99, 235, 0.08);
+
+    color: var(--primary-color);
+}
+
+
+/* =========================================================
+   HERO SECTION
+   ========================================================= */
+
+.hero-section {
+    background:
+        radial-gradient(ellipse 80% 60% at 85% 20%, rgba(245, 196, 81, 0.18), transparent 50%),
+        radial-gradient(ellipse 50% 80% at 0% 100%, rgba(13, 148, 136, 0.2), transparent 45%),
+        linear-gradient(145deg, #061225 0%, #0b1d3a 42%, #1d4ed8 100%);
+
+    color: white;
+
+    padding: 5rem 1rem 4.5rem;
+
+    border-radius: 0 0 40px 40px;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+
+    position: absolute;
+
+    inset: 0;
+
+    background-image:
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+
+    background-size: 48px 48px;
+
+    mask-image: linear-gradient(180deg, rgba(0,0,0,0.5), transparent 80%);
+
+    pointer-events: none;
+}
+
+.hero-section::after {
+    content: '';
+
+    position: absolute;
+
+    top: -50%;
+
+    right: -20%;
+
+    width: 600px;
+
+    height: 600px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,0.08) 0%,
+            rgba(255,255,255,0) 70%
+        );
+
+    border-radius: 50%;
+
+    pointer-events: none;
+}
+
+.hero-section > * {
+    position: relative;
+
+    z-index: 1;
+}
+
+.hero-search {
+    padding: 0.5rem 0.5rem 0.5rem 0.85rem;
+}
+
+
+/* =========================================================
+   CUSTOM CARDS
+   ========================================================= */
+
+.card-custom,
+.product-card,
+.stat-card {
+    border: 1px solid rgba(226, 232, 240, 0.9);
+
+    border-radius: var(--radius-md);
+
+    background: #ffffff;
+
+    box-shadow: var(--card-shadow);
+
+    transition:
+        all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    overflow: hidden;
+}
+
+.card-custom:hover,
+.product-card:hover {
+    transform: translateY(-6px);
+
+    border-color: rgba(37, 99, 235, 0.25);
+
+    box-shadow: var(--hover-shadow);
+}
+
+.card-custom img {
+    transition: transform 0.3s ease;
+    max-width: 100%;
+}
+
+.card-img-top {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    display: block;
+    background-color: #f1f5f9;
+}
+
+.card-custom:hover img {
+    transform: scale(1.03);
+}
+
+
+/* =========================================================
+   CATEGORY TILES
+   ========================================================= */
+
+.category-tile {
+    background: #fff;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: var(--radius-md);
+
+    transition: 0.25s ease;
+}
+
+.category-tile:hover {
+    border-color: #2563eb;
+
+    background: linear-gradient(180deg, #fff, #eff6ff);
+
+    transform: translateY(-3px);
+
+    box-shadow: var(--hover-shadow);
+}
+
+
+/* =========================================================
+   VENDOR CTA
+   ========================================================= */
+
+.cta-banner {
+    background: linear-gradient(135deg, #0b1d3a, #1d4ed8);
+
+    border-radius: 28px;
+
+    margin: 0 1rem 2rem;
+
+    box-shadow: 0 20px 50px rgba(29, 78, 216, 0.25);
+}
+
+
+/* =========================================================
+   DASHBOARD SIDEBAR
+   ========================================================= */
+
+.sidebar-wrapper {
+    background: #ffffff;
+
+    border-radius: var(--radius-md);
+
+    border: 1px solid rgba(226, 232, 240, 0.9);
+
+    box-shadow: var(--card-shadow);
+
+    padding: 1rem;
+}
+
+.sidebar-link {
+    display: flex;
+
+    align-items: center;
+
+    gap: 0.75rem;
+
+    padding: 0.75rem 1rem;
+
+    color: #475569;
+
+    text-decoration: none;
+
+    border-radius: 8px;
+
+    font-weight: 500;
+
+    transition: all 0.2s ease;
+}
+
+.sidebar-link:hover,
+.sidebar-link.active {
+    background: rgba(37, 99, 235, 0.08);
+
+    color: var(--primary-color);
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.btn-primary {
+    background: var(--primary-gradient);
+
+    border: none;
+
+    border-radius: 12px;
+
+    font-weight: 600;
+
+    letter-spacing: 0.01em;
+
+    box-shadow:
+        0 4px 10px rgba(37, 99, 235, 0.2);
+
+    transition: all 0.2s ease;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background: linear-gradient(135deg, #1d4ed8 0%, #1e3a8a 100%);
+
+    border: none;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 8px 18px rgba(37, 99, 235, 0.25);
+}
+
+.btn-warning {
+    background: linear-gradient(135deg, #f5c451, #e8a317);
+
+    border: none;
+
+    color: #0b1d3a !important;
+
+    font-weight: 600;
+}
+
+.btn-warning:hover,
+.btn-warning:focus {
+    background: linear-gradient(135deg, #e8a317, #d4920f);
+
+    color: #0b1d3a !important;
+
+    border: none;
+}
+
+.btn-success {
+    box-shadow:
+        0 4px 10px rgba(16, 185, 129, 0.15);
+}
+
+
+/* =========================================================
+   STATUS BADGES
+   ========================================================= */
+
+.badge-status {
+    padding: 0.35rem 0.75rem;
+
+    border-radius: 20px;
+
+    font-weight: 600;
+
+    font-size: 0.8rem;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+
+    display: inline-block;
+}
+
+
+/* Approved / Valid / Delivered */
+
+.status-approved,
+.status-valid,
+.status-delivered,
+.status-resolved {
+    background: #d1fae5;
+
+    color: #065f46;
+}
+
+
+/* Pending / Submitted */
+
+.status-pending,
+.status-submitted,
+.status-under-review,
+.status-assigned {
+    background: #fef3c7;
+
+    color: #92400e;
+}
+
+
+/* Correction / Expired */
+
+.status-correction-required,
+.status-expired {
+    background: #ffedd5;
+
+    color: #9a3412;
+}
+
+
+/* Rejected / Suspended */
+
+.status-rejected,
+.status-suspended,
+.status-cancelled,
+.status-closed {
+    background: #fee2e2;
+
+    color: #991b1b;
+}
+
+
+/* =========================================================
+   MAP / GIS
+   ========================================================= */
+
+#map,
+#gis-map {
+    height: 420px;
+
+    width: 100%;
+
+    border-radius: var(--radius-md);
+
+    box-shadow: var(--card-shadow);
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   DIGITAL LICENSE CERTIFICATE
+   ========================================================= */
+
+.license-certificate {
+    background: #ffffff;
+
+    border: 8px double var(--gov-navy);
+
+    padding: 2.5rem;
+
+    position: relative;
+
+    border-radius: 8px;
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,0.1);
+}
+
+.license-header {
+    border-bottom: 2px solid var(--gov-navy);
+
+    padding-bottom: 1rem;
+
+    margin-bottom: 1.5rem;
+}
+
+.qr-placeholder {
+    width: 130px;
+
+    height: 130px;
+
+    border: 2px solid #cbd5e1;
+
+    border-radius: 8px;
+
+    padding: 4px;
+}
+
+
+/* =========================================================
+   FORMS
+   ========================================================= */
+
+.form-control,
+.form-select {
+    border-radius: var(--radius-sm);
+
+    border: 1px solid #cbd5e1;
+
+    padding: 0.65rem 0.8rem;
+
+    transition: all 0.2s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #2563eb;
+
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+
+/* =========================================================
+   TABLES
+   ========================================================= */
+
+.table {
+    vertical-align: middle;
+}
+
+.table thead th {
+    background: #f1f5f9;
+
+    color: #334155;
+
+    font-weight: 600;
+
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.table tbody tr {
+    transition: background 0.2s ease;
+}
+
+.table tbody tr:hover {
+    background: rgba(37, 99, 235, 0.03);
+}
+
+
+/* =========================================================
+   ALERTS
+   ========================================================= */
+
+.alert {
+    border: none;
+
+    border-radius: var(--radius-sm);
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+footer {
+    margin-top: auto;
+
+    background:
+        linear-gradient(180deg, #0b1d3a 0%, #061225 100%);
+
+    border-top: 3px solid var(--gov-gold);
+
+    color: #94a3b8;
+
+    padding: 3rem 0 1.5rem 0;
+}
+
+footer a {
+    color: #cbd5e1;
+
+    text-decoration: none;
+
+    transition: color 0.2s ease;
+}
+
+footer a:hover {
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   STAR RATING
+   ========================================================= */
+
+.star-rating {
+    display: inline-flex;
+
+    flex-direction: row-reverse;
+
+    font-size: 1.5rem;
+}
+
+.star-rating input {
+    display: none;
+}
+
+.star-rating label {
+    color: #cbd5e1;
+
+    cursor: pointer;
+
+    padding: 0 0.1rem;
+
+    transition: color 0.15s ease;
+}
+
+.star-rating input:checked ~ label,
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+    color: var(--gov-gold);
+}
+
+
+/* =========================================================
+   PRODUCT CARDS
+   ========================================================= */
+
+.product-card img {
+    width: 100%;
+
+    height: 220px;
+
+    object-fit: cover;
+}
+
+
+/* =========================================================
+   SEARCH BAR
+   ========================================================= */
+
+.search-box {
+    position: relative;
+}
+
+.search-box input {
+    padding-left: 2.75rem;
+
+    border-radius: 25px;
+}
+
+.search-box .search-icon {
+    position: absolute;
+
+    left: 1rem;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #64748b;
+}
+
+
+/* =========================================================
+   DASHBOARD STAT CARDS
+   ========================================================= */
+
+.stat-card {
+    padding: 1.5rem;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow: var(--hover-shadow);
+}
+
+.stat-icon {
+    width: 50px;
+
+    height: 50px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 12px;
+
+    font-size: 1.4rem;
+}
+
+
+/* =========================================================
+   RESPONSIVE DESIGN
+   ========================================================= */
+
+@media (max-width: 991.98px) {
+
+    .navbar-smartgov {
+        min-height: 60px;
+    }
+
+    .navbar-smartgov .navbar-nav {
+        align-items: stretch;
+
+        padding-top: 0.75rem;
+    }
+
+    .navbar-smartgov .navbar-nav .nav-link {
+        margin: 0.15rem 0;
+
+        padding: 0.7rem 1rem !important;
+    }
+
+    .hero-section {
+        padding: 3rem 1rem;
+    }
+}
+
+
+@media (max-width: 767.98px) {
+
+    .hero-section {
+        padding: 2.5rem 1rem;
+
+        border-radius: 0 0 24px 24px;
+    }
+
+    .cta-banner {
+        margin: 0 0.75rem 1.5rem;
+
+        border-radius: 20px;
+    }
+
+    #map,
+    #gis-map {
+        height: 320px;
+    }
+
+    .license-certificate {
+        padding: 1.25rem;
+
+        border-width: 5px;
+    }
+
+    .product-card img {
+        height: 180px;
+    }
+}
+
+
+@media (max-width: 575.98px) {
+
+    .navbar-smartgov {
+        padding: 0.5rem 0.75rem;
+    }
+
+    .navbar-smartgov .navbar-brand {
+        font-size: 1.05rem;
+    }
+
+    .hero-section {
+        padding: 2rem 0.75rem;
+    }
+
+    #map,
+    #gis-map {
+        height: 280px;
+    }
+}
+
+
+/* =========================================================
+   PRINT CSS
+   ========================================================= */
+
+@media print {
+
+    body * {
+        visibility: hidden;
+    }
+
+    .printable-area,
+    .printable-area * {
+        visibility: visible;
+    }
+
+    .printable-area {
+        position: absolute;
+
+        left: 0;
+
+        top: 0;
+
+        width: 100%;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+
+    .license-certificate {
+        box-shadow: none;
+    }
+}
