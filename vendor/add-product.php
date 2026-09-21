@@ -15,7 +15,7 @@ $vStmt = $db->prepare("SELECT id, status FROM vendors WHERE user_id = ?");
 $vStmt->execute([$user_id]);
 $vendor = $vStmt->fetch();
 
-if (!$vendor || $vendor['status'] !== 'Approved') {
+if (!$vendor || !in_array($vendor['status'], ['Approved', 'Verified'], true)) {
     setFlashMessage('danger', 'Only government-approved vendors can list products.');
     redirect('vendor/products.php');
 }

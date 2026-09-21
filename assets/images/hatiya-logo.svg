@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 120" width="520" height="120">
+    <defs>
+        <linearGradient id="crimsonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#DC143C" />
+            <stop offset="100%" stop-color="#9E0B22" />
+        </linearGradient>
+        <linearGradient id="navyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#12355B" />
+            <stop offset="100%" stop-color="#0B2545" />
+        </linearGradient>
+        <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#F5C451" />
+            <stop offset="100%" stop-color="#C5A059" />
+        </linearGradient>
+        <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.15" />
+        </filter>
+    </defs>
+    
+    <!-- Emblem Background Badge -->
+    <g transform="translate(10, 10)">
+        <!-- Outer Gold Rim -->
+        <circle cx="50" cy="50" r="48" fill="url(#goldGrad)" />
+        <!-- Inner Navy Circle -->
+        <circle cx="50" cy="50" r="44" fill="url(#navyGrad)" />
+        
+        <!-- Mountain Peak Silhouette (Inspired by Himalayas) -->
+        <polygon points="20,70 42,32 58,52 70,36 84,70" fill="url(#crimsonGrad)" opacity="0.9" />
+        <polygon points="32,70 50,40 68,70" fill="#FFFFFF" opacity="0.3" />
+        
+        <!-- Crescent Sun & Moon (Nepal Flag Symbol Inspiration) -->
+        <path d="M 44,24 A 8,8 0 0,0 56,24 A 6,6 0 0,1 44,24 Z" fill="url(#goldGrad)" />
+        <circle cx="50" cy="18" r="3" fill="url(#goldGrad)" />
+        
+        <!-- Digital Nodes & Pillars Circle Overlay -->
+        <circle cx="50" cy="50" r="41" fill="none" stroke="url(#goldGrad)" stroke-width="1.5" stroke-dasharray="6,3" />
+    </g>
+
+    <!-- Brand Text Section -->
+    <g transform="translate(120, 22)">
+        <!-- Main Title HATIYA -->
+        <text x="0" y="45" font-family="'Inter', 'Arial Black', sans-serif" font-weight="900" font-size="44" fill="url(#navyGrad)" letter-spacing="2">
+            HATIYA
+        </text>
+        
+        <!-- Subtitle Badge / Tagline -->
+        <rect x="0" y="58" width="375" height="26" rx="6" fill="url(#crimsonGrad)" filter="url(#shadow)" />
+        <text x="12" y="75" font-family="'Inter', sans-serif" font-weight="700" font-size="12" fill="#FFFFFF" letter-spacing="1">
+            DIGITAL GOVERNANCE &amp; MARKETPLACE PLATFORM
+        </text>
+    </g>
+</svg>

@@ -1,5 +1,5 @@
 <?php
-// SmartGov Market - Master Footer Template
+// HATIYA - Master Footer Template
 // File: includes/footer.php
 ?>
 </main> <!-- /main -->
@@ -7,47 +7,63 @@
 <footer class="mt-auto">
     <div class="container">
         <div class="row g-4 mb-4">
+            <!-- Col 1: Branding & Mission -->
             <div class="col-lg-4 col-md-6">
-                <h5 class="text-white fw-bold mb-3"><i class="fa-solid fa-building-columns text-warning me-2"></i>SmartGov Market</h5>
-                <p class="small text-secondary mb-3" data-i18n="footerTagline">Connecting citizens, vendors, and government for transparent governance and thriving local economy.</p>
-                <div class="d-flex gap-2">
-                    <span class="badge bg-secondary p-2"><i class="fa-solid fa-shield-halved me-1"></i> SSL Secured</span>
-                    <span class="badge bg-success p-2"><i class="fa-solid fa-qrcode me-1"></i> QR Verified</span>
+                <div class="d-flex align-items-center gap-2 mb-3">
+                    <img src="<?= BASE_URL ?>assets/images/nepal-emblem.svg" alt="Emblem of Nepal" height="42" class="bg-white p-1 rounded">
+                    <span class="text-white fw-bold fs-5">HATIYA</span>
+                </div>
+                <p class="small text-secondary mb-3">
+                    HATIYA is Nepal's integrated digital portal empowering citizens, verifying local businesses, and providing transparent government services.
+                </p>
+                <div class="d-flex gap-2 flex-wrap">
+                    <span class="badge bg-danger p-2"><i class="fa-solid fa-shield-halved me-1"></i> Government Authenticated</span>
+                    <span class="badge bg-success p-2"><i class="fa-solid fa-qrcode me-1"></i> QR Business Verified</span>
                 </div>
             </div>
+
+            <!-- Col 2: Navigation Links -->
             <div class="col-lg-2 col-md-6">
-                <h6 class="text-white fw-semibold mb-3" data-i18n="quickLinks">Quick Links</h6>
+                <h6 class="text-white fw-bold mb-3">Quick Links</h6>
                 <ul class="list-unstyled small">
-                    <li class="mb-2"><a href="<?= BASE_URL ?>index.php" data-i18n="home">Home</a></li>
-                    <li class="mb-2"><a href="<?= BASE_URL ?>products.php" data-i18n="products">Products</a></li>
-                    <li class="mb-2"><a href="<?= BASE_URL ?>government-services.php" data-i18n="services">Government Services</a></li>
-                    <li class="mb-2"><a href="<?= BASE_URL ?>map-view.php" data-i18n="map">GIS Vendor Map</a></li>
-                    <li class="mb-2"><a href="<?= BASE_URL ?>complaints.php" data-i18n="complaints">Public Complaints</a></li>
+                    <li class="mb-2"><a href="<?= BASE_URL ?>index.php">Home</a></li>
+                    <li class="mb-2"><a href="<?= BASE_URL ?>government-services.php">Government Services</a></li>
+                    <li class="mb-2"><a href="<?= BASE_URL ?>products.php">Marketplace</a></li>
+                    <li class="mb-2"><a href="<?= BASE_URL ?>verify.php">Digital Licenses</a></li>
+                    <li class="mb-2"><a href="<?= BASE_URL ?>complaints.php">Public Complaints</a></li>
+                    <li class="mb-2"><a href="<?= BASE_URL ?>map-view.php">GIS Vendor Map</a></li>
                 </ul>
             </div>
+
+            <!-- Col 3: Portal Modules -->
             <div class="col-lg-3 col-md-6">
-                <h6 class="text-white fw-semibold mb-3">E-Governance Modules</h6>
+                <h6 class="text-white fw-bold mb-3">E-Governance Portals</h6>
                 <ul class="list-unstyled small">
-                    <li class="mb-2"><a href="<?= BASE_URL ?>vendor/register.php">Vendor Registration</a></li>
+                    <li class="mb-2"><a href="<?= BASE_URL ?>vendor/register.php">Business &amp; Vendor Registration</a></li>
                     <li class="mb-2"><a href="<?= BASE_URL ?>verify.php">Verify Business License</a></li>
-                    <li class="mb-2"><a href="<?= BASE_URL ?>login.php">Officer Portal</a></li>
-                    <li class="mb-2"><a href="<?= BASE_URL ?>login.php">Admin Portal</a></li>
+                    <li class="mb-2"><a href="<?= BASE_URL ?>register.php">Citizen Account Creation</a></li>
+                    <li class="mb-2"><a href="<?= BASE_URL ?>login.php">Officer &amp; Administrative Portal</a></li>
                 </ul>
             </div>
+
+            <!-- Col 4: Official Contact -->
             <div class="col-lg-3 col-md-6">
-                <h6 class="text-white fw-semibold mb-3" data-i18n="contactGov">Government Support</h6>
-                <p class="small text-secondary mb-1"><i class="fa-solid fa-location-dot me-2 text-warning"></i>Singha Durbar, Kathmandu, Nepal</p>
-                <p class="small text-secondary mb-1"><i class="fa-solid fa-phone me-2 text-warning"></i>+977 1 4200000 / 1111 (Toll-Free)</p>
-                <p class="small text-secondary mb-2"><i class="fa-solid fa-envelope me-2 text-warning"></i>support@smartgov.gov.np</p>
+                <h6 class="text-white fw-bold mb-3">Government Support</h6>
+                <p class="small text-secondary mb-2"><i class="fa-solid fa-location-dot me-2 text-danger"></i>Singha Durbar, Kathmandu, Nepal</p>
+                <p class="small text-secondary mb-2"><i class="fa-solid fa-phone me-2 text-danger"></i>+977 1 4200000 / 1111 (Toll-Free)</p>
+                <p class="small text-secondary mb-2"><i class="fa-solid fa-envelope me-2 text-danger"></i>support@hatiya.gov.np</p>
+                <p class="small text-secondary mb-0"><i class="fa-solid fa-clock me-2 text-danger"></i>Sun - Fri: 10:00 AM - 5:00 PM</p>
             </div>
         </div>
+
         <hr class="border-secondary my-3">
-        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center small text-secondary">
-            <span data-i18n="copyright">© 2026 SmartGov Market. All Rights Reserved.</span>
-            <div>
-                <a href="#" class="me-3">Privacy Policy</a>
-                <a href="#" class="me-3">Terms of Service</a>
-                <a href="#">Help & FAQs</a>
+
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center small text-secondary py-2">
+            <span>© 2026 HATIYA – Digital Governance &amp; Marketplace Platform. Government of Nepal Standards.</span>
+            <div class="mt-2 mt-md-0">
+                <a href="<?= BASE_URL ?>government-services.php#privacy" class="me-3">Privacy Policy</a>
+                <a href="<?= BASE_URL ?>government-services.php#terms" class="me-3">Terms of Use</a>
+                <a href="<?= BASE_URL ?>government-services.php#accessibility">Accessibility Statement</a>
             </div>
         </div>
     </div>

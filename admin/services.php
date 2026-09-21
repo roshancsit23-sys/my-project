@@ -2,8 +2,10 @@
 // SmartGov Market - Admin Government Services Management
 // File: admin/services.php
 
-$pageTitle = "Government Services Management";
-require_once __DIR__ . '/../includes/header.php';
+require_once __DIR__ . '/../config/app.php';
+require_once __DIR__ . '/../config/database.php';
+require_once __DIR__ . '/../includes/auth.php';
+
 requireRole('admin');
 
 $db = getDBConnection();
@@ -11,7 +13,7 @@ $departments = $db->query("SELECT * FROM departments WHERE is_active=1")->fetchA
 $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'add_service') {
-    $dept_id = (int)$_POST['department_id'];
+    $dept_id = (int)($_POST['department_id'] ?? 0);
     $name = sanitize($_POST['service_name'] ?? '');
     $desc = sanitize($_POST['description'] ?? '');
     $req = sanitize($_POST['requirements'] ?? '');
@@ -27,6 +29,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
         redirect('admin/services.php');
     }
 }
+
+$pageTitle = "Government Services Management";
+require_once __DIR__ . '/../includes/header.php';
 
 $services = $db->query("SELECT gs.*, d.department_name 
                         FROM government_services gs

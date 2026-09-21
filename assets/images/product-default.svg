@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300" fill="none">
+  <rect width="400" height="300" fill="#F1F5F9"/>
+  <rect x="2" y="2" width="396" height="296" rx="8" stroke="#CBD5E1" stroke-width="2" stroke-dasharray="6 6"/>
+  <path d="M150 110C150 121 141 130 130 130C119 130 110 121 110 110C110 99 119 90 130 90C141 90 150 99 150 110Z" fill="#94A3B8"/>
+  <path d="M90 220L150 145L205 200L255 135L310 220H90Z" fill="#94A3B8"/>
+  <text x="200" y="250" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" fill="#64748B" text-anchor="middle">SmartGov Verified Product</text>
+</svg>

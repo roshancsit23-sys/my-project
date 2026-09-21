@@ -47,7 +47,7 @@ if (!$cart_id) {
     redirect('cart.php');
 }
 
-$itemsStmt = $db->prepare("SELECT ci.*, p.price as db_price, p.stock_quantity, p.vendor_id, p.name as product_name, v.status as vendor_status 
+$itemsStmt = $db->prepare("SELECT ci.*, p.price as db_price, p.stock_quantity, p.vendor_id, p.name as product_name, p.status as product_status, v.status as vendor_status 
                            FROM cart_items ci
                            JOIN products p ON ci.product_id = p.id
                            JOIN vendors v ON p.vendor_id = v.id
@@ -60,10 +60,14 @@ if (count($cartItems) === 0) {
     redirect('cart.php');
 }
 
-// 1. Stock Validation
+// 1. Product Status & Stock Validation
 foreach ($cartItems as $item) {
-    if ($item['vendor_status'] !== 'Approved') {
-        setFlashMessage('danger', "Product '{$item['product_name']}' is from an unapproved vendor.");
+    if ($item['product_status'] !== 'Active') {
+        setFlashMessage('danger', "Product '{$item['product_name']}' is currently unavailable or has been disabled.");
+        redirect('cart.php');
+    }
+    if (!in_array($item['vendor_status'], ['Approved', 'Verified'], true)) {
+        setFlashMessage('danger', "Product '{$item['product_name']}' is from an unverified vendor.");
         redirect('cart.php');
     }
     if ($item['quantity'] > $item['stock_quantity']) {

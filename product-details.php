@@ -10,7 +10,7 @@ require_once __DIR__ . '/includes/license_generator.php';
 $db = getDBConnection();
 $prod_id = (int)($_GET['id'] ?? 0);
 
-$stmt = $db->prepare("SELECT p.*, v.business_name, v.business_type, v.address as v_address, v.municipality as v_muni, v.district as v_dist, v.id as vendor_id, c.name as category_name 
+$stmt = $db->prepare("SELECT p.*, v.business_name, v.business_type, v.status as vendor_status, v.address as v_address, v.municipality as v_muni, v.district as v_dist, v.id as vendor_id, c.name as category_name 
                       FROM products p
                       JOIN vendors v ON p.vendor_id = v.id
                       JOIN categories c ON p.category_id = c.id
@@ -20,6 +20,11 @@ $product = $stmt->fetch();
 
 if (!$product) {
     setFlashMessage('danger', 'Product not found.');
+    redirect('products.php');
+}
+
+if (($product['status'] !== 'Active' || !in_array($product['vendor_status'], ['Approved', 'Verified'], true)) && !hasRole('admin')) {
+    setFlashMessage('warning', 'This product is currently unavailable or disabled in the marketplace.');
     redirect('products.php');
 }
 
@@ -157,8 +162,13 @@ $imgUrl = !empty($product['image_path']) ? BASE_URL . $product['image_path'] : B
 
                 <p class="text-secondary mb-4"><?= nl2br(sanitize($product['description'])) ?></p>
 
-                <!-- Purchase Buttons -->
-                <?php if ($product['stock_quantity'] > 0): ?>
+                <!-- Purchase Buttons or Disabled Banner -->
+                <?php if ($product['status'] !== 'Active' || !in_array($product['vendor_status'], ['Approved', 'Verified'], true)): ?>
+                    <div class="alert alert-warning p-4 rounded-3 mb-4 shadow-sm border-warning border-opacity-50">
+                        <h5 class="fw-bold text-dark mb-1"><i class="fa-solid fa-triangle-exclamation text-warning me-2"></i>Product currently unavailable</h5>
+                        <p class="mb-0 text-muted small">This product has been disabled by marketplace administrators or is currently inactive. It cannot be added to cart or purchased at this time.</p>
+                    </div>
+                <?php elseif ($product['stock_quantity'] > 0): ?>
                     <div class="card p-3 bg-light border-0 rounded-3 mb-4">
                         <div class="row g-2 align-items-center">
                             <div class="col-12 col-sm-auto">
@@ -171,6 +181,7 @@ $imgUrl = !empty($product['image_path']) ? BASE_URL . $product['image_path'] : B
                             <!-- Add to Cart Form -->
                             <div class="col-6 col-sm-auto">
                                 <form action="api/cart.php" method="POST">
+                                    <?= csrf_field() ?>
                                     <input type="hidden" name="action" value="add">
                                     <input type="hidden" name="product_id" value="<?= $product['id'] ?>">
                                     <input type="hidden" name="quantity" class="qty-field" value="1">
@@ -183,6 +194,7 @@ $imgUrl = !empty($product['image_path']) ? BASE_URL . $product['image_path'] : B
                             <!-- Order Now Form (Direct Checkout) -->
                             <div class="col-6 col-sm-auto">
                                 <form action="api/cart.php" method="POST">
+                                    <?= csrf_field() ?>
                                     <input type="hidden" name="action" value="add">
                                     <input type="hidden" name="product_id" value="<?= $product['id'] ?>">
                                     <input type="hidden" name="quantity" class="qty-field" value="1">
@@ -200,6 +212,10 @@ $imgUrl = !empty($product['image_path']) ? BASE_URL . $product['image_path'] : B
                         document.querySelectorAll('.qty-field').forEach(el => el.value = val);
                     }
                     </script>
+                <?php else: ?>
+                    <div class="alert alert-secondary p-3 rounded-3 mb-4">
+                        <i class="fa-solid fa-circle-info me-1"></i> This item is currently out of stock. Please check back later.
+                    </div>
                 <?php endif; ?>
 
                 <!-- Vendor License Card -->

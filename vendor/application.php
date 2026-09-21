@@ -2,8 +2,9 @@
 // SmartGov Market - Vendor Application & Document Submission
 // File: vendor/application.php
 
-$pageTitle = "Vendor Digital License Application";
-require_once __DIR__ . '/../includes/header.php';
+require_once __DIR__ . '/../config/app.php';
+require_once __DIR__ . '/../config/database.php';
+require_once __DIR__ . '/../includes/auth.php';
 requireRole('vendor');
 
 $db = getDBConnection();
@@ -120,6 +121,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
         redirect('vendor/application.php');
     }
 }
+
+$pageTitle = "Vendor Digital License Application";
+require_once __DIR__ . '/../includes/header.php';
 ?>
 
 <div class="container py-4">

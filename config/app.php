@@ -17,9 +17,11 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-define('APP_NAME', 'SmartGov Market');
-define('APP_TAGLINE', 'Integrated E-Governance and E-Commerce Platform');
-define('APP_VERSION', '1.1.0');
+require_once __DIR__ . '/../includes/i18n.php';
+
+define('APP_NAME', 'HATIYA');
+define('APP_TAGLINE', 'Digital Governance & Marketplace Platform');
+define('APP_VERSION', '2.0.0');
 
 $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443)) ? 'https://' : 'http://';
 $host = $_SERVER['HTTP_HOST'] ?? 'localhost';

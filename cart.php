@@ -9,12 +9,19 @@ requireLogin();
 $db = getDBConnection();
 $user_id = $_SESSION['user_id'];
 
+// Automatically purge disabled or unverified vendor products from cart
+$db->prepare("DELETE ci FROM cart_items ci 
+              JOIN cart c ON ci.cart_id = c.id 
+              JOIN products p ON ci.product_id = p.id 
+              JOIN vendors v ON p.vendor_id = v.id 
+              WHERE c.user_id = ? AND (p.status != 'Active' OR v.status NOT IN ('Approved', 'Verified'))")->execute([$user_id]);
+
 $cartStmt = $db->prepare("SELECT ci.*, p.name as product_name, p.image_path, p.stock_quantity, v.business_name 
                           FROM cart c
                           JOIN cart_items ci ON c.id = ci.cart_id
                           JOIN products p ON ci.product_id = p.id
                           JOIN vendors v ON p.vendor_id = v.id
-                          WHERE c.user_id = ?");
+                          WHERE c.user_id = ? AND p.status = 'Active' AND v.status IN ('Approved', 'Verified')");
 $cartStmt->execute([$user_id]);
 $cartItems = $cartStmt->fetchAll();
 
@@ -56,7 +63,7 @@ foreach ($cartItems as $item) {
                                     <tr>
                                         <td>
                                             <div class="d-flex align-items-center gap-3">
-                                                <img src="<?= BASE_URL . ($item['image_path'] ? $item['image_path'] : 'assets/css/product-default.jpg') ?>" onerror="this.src='https://via.placeholder.com/60';" class="rounded border" width="55" height="55" style="object-fit:cover;">
+                                                <img src="<?= BASE_URL . ($item['image_path'] ? $item['image_path'] : 'assets/images/product-default.svg') ?>" onerror="this.onerror=null;this.src='<?= BASE_URL ?>assets/images/product-default.svg';" class="rounded border" width="55" height="55" style="object-fit:cover;">
                                                 <div>
                                                     <a href="product-details.php?id=<?= $item['product_id'] ?>" class="fw-bold text-dark text-decoration-none"><?= sanitize($item['product_name']) ?></a>
                                                     <small class="d-block text-muted">Vendor: <?= sanitize($item['business_name']) ?></small>

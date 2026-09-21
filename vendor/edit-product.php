@@ -34,6 +34,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $price = filter_var($_POST['price'] ?? 0, FILTER_VALIDATE_FLOAT);
     $stock = filter_var($_POST['stock_quantity'] ?? 0, FILTER_VALIDATE_INT);
     $status = sanitize($_POST['status'] ?? 'Active');
+    if ($product['status'] === 'Disabled') {
+        $status = 'Disabled'; // Admin disabled status cannot be overridden by vendor
+    }
     $description = sanitize($_POST['description'] ?? '');
     
     if (empty($name) || $category_id <= 0 || $price <= 0 || $stock < 0 || empty($description)) {

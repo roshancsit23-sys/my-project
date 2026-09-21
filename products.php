@@ -19,7 +19,7 @@ $query = "SELECT p.*, v.business_name, v.municipality, c.name as category_name
           FROM products p
           JOIN vendors v ON p.vendor_id = v.id
           JOIN categories c ON p.category_id = c.id
-          WHERE p.status = 'Active' AND v.status = 'Approved'";
+          WHERE p.status = 'Active' AND v.status IN ('Approved', 'Verified') AND c.is_active = 1";
 $params = [];
 
 if ($category_id > 0) {

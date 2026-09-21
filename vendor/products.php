@@ -19,7 +19,7 @@ if (!$vendor) {
     redirect('index.php');
 }
 
-$isApproved = ($vendor['status'] === 'Approved');
+$isApproved = in_array($vendor['status'], ['Approved', 'Verified'], true);
 
 // Toggle Product Status (Active / Inactive)
 if (isset($_GET['toggle_id']) && $isApproved) {
@@ -28,6 +28,10 @@ if (isset($_GET['toggle_id']) && $isApproved) {
     $pStmt->execute([$pid, $vendor['id']]);
     $prod = $pStmt->fetch();
     if ($prod) {
+        if ($prod['status'] === 'Disabled') {
+            setFlashMessage('danger', 'This product has been disabled by a marketplace administrator and cannot be modified or re-activated by the vendor.');
+            redirect('vendor/products.php');
+        }
         $newStatus = ($prod['status'] === 'Active') ? 'Inactive' : 'Active';
         $uStmt = $db->prepare("UPDATE products SET status = ? WHERE id = ?");
         $uStmt->execute([$newStatus, $pid]);

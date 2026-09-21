@@ -34,8 +34,8 @@ $db = getDBConnection();
                     <div class="col-md-6">
                         <div class="p-3 bg-light rounded border">
                             <h6 class="fw-bold text-primary mb-2">Database Connection</h6>
-                            <p class="small text-muted mb-1">Host: <strong>localhost:3306</strong></p>
-                            <p class="small text-muted mb-0">Database: <strong>smartgov_market (MySQL 8.0/MariaDB)</strong></p>
+                            <p class="small text-muted mb-1">Host: <strong><?= DB_HOST ?>:<?= DB_PORT ?> (MariaDB/MySQL)</strong></p>
+                            <p class="small text-muted mb-0">Database: <strong><?= DB_NAME ?> (Active Connection)</strong></p>
                         </div>
                     </div>
 

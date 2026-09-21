@@ -2,13 +2,15 @@
 // SmartGov Market - Admin Users & Role Management
 // File: admin/users.php
 
-$pageTitle = "User Management";
-require_once __DIR__ . '/../includes/header.php';
+require_once __DIR__ . '/../config/app.php';
+require_once __DIR__ . '/../config/database.php';
+require_once __DIR__ . '/../includes/auth.php';
+
 requireRole('admin');
 
 $db = getDBConnection();
 
-// Toggle active status
+// Toggle active status BEFORE header.php
 if (isset($_GET['toggle_id'])) {
     $uid = (int)$_GET['toggle_id'];
     if ($uid !== $_SESSION['user_id']) {
@@ -26,6 +28,9 @@ if (isset($_GET['toggle_id'])) {
         }
     }
 }
+
+$pageTitle = "User Management";
+require_once __DIR__ . '/../includes/header.php';
 
 $search = sanitize($_GET['search'] ?? '');
 $roleFilter = (int)($_GET['role_id'] ?? 0);
@@ -117,7 +122,7 @@ $roles = $db->query("SELECT * FROM roles")->fetchAll();
                                     </td>
                                     <td>
                                         <?php if ($u['id'] != $_SESSION['user_id']): ?>
-                                            <a href="admin/users.php?toggle_id=<?= $u['id'] ?>" class="btn btn-xs <?= $u['is_active'] == 1 ? 'btn-outline-danger' : 'btn-outline-success' ?>" onclick="return confirm('Toggle active status for user?');">
+                                            <a href="<?= BASE_URL ?>admin/users.php?toggle_id=<?= $u['id'] ?>" class="btn btn-xs <?= $u['is_active'] == 1 ? 'btn-outline-danger' : 'btn-outline-success' ?>" onclick="return confirm('Toggle active status for user?');">
                                                 <?= $u['is_active'] == 1 ? 'Deactivate' : 'Activate' ?>
                                             </a>
                                         <?php else: ?>

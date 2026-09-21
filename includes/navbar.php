@@ -1,5 +1,5 @@
 <?php
-// SmartGov Market - Top Navbar Navigation
+// HATIYA - Top Navigation Bar Component
 // File: includes/navbar.php
 
 $cartCount = 0;
@@ -34,397 +34,111 @@ if (isLoggedIn()) {
 }
 ?>
 
-<!-- =====================================================
-     SMARTGOV MARKET NAVBAR
-     ===================================================== -->
-
-<nav class="navbar navbar-expand-lg navbar-dark navbar-smartgov sticky-top">
-
+<nav class="navbar navbar-expand-lg navbar-dark navbar-hatiya sticky-top">
     <div class="container">
-
-        <!-- BRAND -->
-        <a class="navbar-brand d-flex align-items-center gap-2"
-           href="<?= BASE_URL ?>index.php">
-
-            <i class="fa-solid fa-building-columns text-warning fs-4"></i>
-
-            <div class="d-flex align-items-center flex-wrap">
-
-                <span class="fw-bold fs-5 text-white"
-                      data-i18n="appName">
-                    SmartGov Market
-                </span>
-
-                <span class="brand-badge ms-2">
-                    GOV + MARKET
-                </span>
-
-            </div>
-
+        <!-- BRAND LOGO (For Mobile View fallback or navbar view) -->
+        <a class="navbar-brand d-lg-none d-flex align-items-center gap-2" href="<?= BASE_URL ?>index.php">
+            <span class="fw-bold text-white fs-5">HATIYA</span>
+            <span class="badge bg-danger">GOV</span>
         </a>
 
-
         <!-- MOBILE TOGGLE -->
-        <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#smartGovNavbar"
-            aria-controls="smartGovNavbar"
-            aria-expanded="false"
-            aria-label="Toggle navigation">
-
+        <button class="navbar-toggler py-2 px-3 border-0" type="button" data-bs-toggle="collapse" data-bs-target="#hatiyaNavbar" aria-controls="hatiyaNavbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-
         </button>
 
-
         <!-- NAVBAR CONTENT -->
-        <div class="collapse navbar-collapse" id="smartGovNavbar">
-
-
-            <!-- MAIN NAVIGATION -->
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-
-                <!-- HOME -->
+        <div class="collapse navbar-collapse" id="hatiyaNavbar">
+            <!-- MAIN NAVIGATION LINKS -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-lg-center">
                 <li class="nav-item">
-
-                    <a class="nav-link"
-                       href="<?= BASE_URL ?>index.php">
-
-                        <i class="fa-solid fa-house me-1"></i>
-
-                        <span data-i18n="home">
-                            Home
-                        </span>
-
+                    <a class="nav-link" href="<?= BASE_URL ?>index.php">
+                        <i class="fa-solid fa-house me-1"></i><?= __('nav_home', 'Home') ?>
                     </a>
-
                 </li>
-
-
-                <!-- PRODUCTS -->
                 <li class="nav-item">
-
-                    <a class="nav-link"
-                       href="<?= BASE_URL ?>products.php">
-
-                        <i class="fa-solid fa-store me-1"></i>
-
-                        <span data-i18n="products">
-                            Products
-                        </span>
-
+                    <a class="nav-link" href="<?= BASE_URL ?>government-services.php">
+                        <i class="fa-solid fa-landmark me-1"></i><?= __('nav_services', 'Government Services') ?>
                     </a>
-
                 </li>
-
-
-                <!-- GOVERNMENT SERVICES -->
                 <li class="nav-item">
-
-                    <a class="nav-link"
-                       href="<?= BASE_URL ?>government-services.php">
-
-                        <i class="fa-solid fa-landmark me-1"></i>
-
-                        <span data-i18n="services">
-                            Gov Services
-                        </span>
-
+                    <a class="nav-link" href="<?= BASE_URL ?>products.php">
+                        <i class="fa-solid fa-store me-1"></i><?= __('nav_marketplace', 'Marketplace') ?>
                     </a>
-
                 </li>
-
-
-                <!-- GIS MAP -->
                 <li class="nav-item">
-
-                    <a class="nav-link"
-                       href="<?= BASE_URL ?>map-view.php">
-
-                        <i class="fa-solid fa-map-location-dot me-1"></i>
-
-                        <span data-i18n="map">
-                            GIS Map
-                        </span>
-
+                    <a class="nav-link" href="<?= BASE_URL ?>verify.php">
+                        <i class="fa-solid fa-award me-1"></i><?= __('nav_licenses', 'Digital Licenses') ?>
                     </a>
-
                 </li>
-
-
-                <!-- COMPLAINTS -->
                 <li class="nav-item">
-
-                    <a class="nav-link"
-                       href="<?= BASE_URL ?>complaints.php">
-
-                        <i class="fa-solid fa-circle-exclamation me-1"></i>
-
-                        <span data-i18n="complaints">
-                            Complaints
-                        </span>
-
+                    <a class="nav-link" href="<?= BASE_URL ?>map-view.php">
+                        <i class="fa-solid fa-map-location-dot me-1"></i><?= __('nav_complaints', 'Complaints & GIS') ?>
                     </a>
-
                 </li>
-
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= BASE_URL ?>government-services.php#notices">
+                        <i class="fa-solid fa-bullhorn me-1"></i><?= __('nav_notices', 'Public Notices') ?>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= BASE_URL ?>index.php#about-hatiya">
+                        <i class="fa-solid fa-circle-info me-1"></i><?= __('nav_about', 'About HATIYA') ?>
+                    </a>
+                </li>
             </ul>
 
-
-            <!-- RIGHT SIDE -->
-            <div class="d-flex align-items-center gap-2 flex-wrap">
-
-
+            <!-- RIGHT ACTION CONTROLS -->
+            <div class="d-flex align-items-center gap-2 py-2 py-lg-0 flex-wrap">
                 <!-- CART -->
-                <a
-                    href="<?= BASE_URL ?>cart.php"
-                    class="btn btn-outline-light btn-sm position-relative">
-
-                    <i class="fa-solid fa-cart-shopping me-1"></i>
-
-                    <span data-i18n="cart">
-                        Cart
-                    </span>
-
+                <a href="<?= BASE_URL ?>cart.php" class="btn btn-outline-light btn-sm position-relative fw-semibold">
+                    <i class="fa-solid fa-cart-shopping me-1"></i><?= __('nav_cart', 'Cart') ?>
                     <?php if ($cartCount > 0): ?>
-
-                        <span
-                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                             <?= $cartCount ?>
-
                         </span>
-
                     <?php endif; ?>
-
                 </a>
 
-
-                <!-- LANGUAGE -->
-                <button
-                    class="btn btn-warning btn-sm text-dark fw-semibold"
-                    id="lang-toggle-btn"
-                    type="button">
-
-                    नेपाली
-
-                </button>
-
-
                 <?php if (isLoggedIn()): ?>
-
-
-                    <!-- NOTIFICATIONS -->
-                    <a
-                        href="<?= BASE_URL ?>notifications.php"
-                        class="navbar-notification text-white position-relative fs-5">
-
-                        <i class="fa-regular fa-bell"></i>
-
-                        <?php if ($unreadCount > 0): ?>
-
-                            <span
-                                class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
-
-                                <span class="visually-hidden">
-                                    New alerts
-                                </span>
-
-                            </span>
-
-                        <?php endif; ?>
-
-                    </a>
-
-
-                    <!-- USER DROPDOWN -->
+                    <!-- USER PROFILE DROPDOWN -->
                     <div class="dropdown">
-
-                        <button
-                            class="btn btn-outline-light btn-sm dropdown-toggle d-flex align-items-center gap-2"
-                            type="button"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false">
-
-                            <i class="fa-solid fa-circle-user fs-5"></i>
-
-                            <span>
-                                <?= sanitize($user['full_name']) ?>
-                            </span>
-
+                        <button class="btn btn-warning btn-sm dropdown-toggle d-flex align-items-center gap-2 text-dark fw-bold" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-circle-user fs-6"></i>
+                            <span><?= sanitize($user['full_name']) ?></span>
                         </button>
-
-
-                        <ul class="dropdown-menu dropdown-menu-end shadow">
-
-
-                            <!-- ROLE -->
-                            <li>
-
-                                <span class="dropdown-header text-uppercase text-muted fw-bold">
-
-                                    <?= sanitize($user['role_display']) ?>
-
-                                </span>
-
-                            </li>
-
-
-                            <!-- ADMIN -->
+                        <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0">
+                            <li><span class="dropdown-header text-uppercase text-muted fw-bold"><?= sanitize($user['role_display']) ?></span></li>
+                            
                             <?php if (hasRole('admin')): ?>
-
-                                <li>
-
-                                    <a
-                                        class="dropdown-item fw-semibold text-primary"
-                                        href="<?= BASE_URL ?>admin/dashboard.php">
-
-                                        <i class="fa-solid fa-gauge me-2"></i>
-
-                                        Admin Dashboard
-
-                                    </a>
-
-                                </li>
-
-
-                            <!-- OFFICER -->
-                            <?php elseif (hasRole('officer')): ?>
-
-                                <li>
-
-                                    <a
-                                        class="dropdown-item fw-semibold text-primary"
-                                        href="<?= BASE_URL ?>officer/dashboard.php">
-
-                                        <i class="fa-solid fa-user-shield me-2"></i>
-
-                                        Officer Dashboard
-
-                                    </a>
-
-                                </li>
-
-
-                            <!-- VENDOR -->
+                                <li><a class="dropdown-item fw-semibold text-primary" href="<?= BASE_URL ?>admin/dashboard.php"><i class="fa-solid fa-gauge me-2"></i><?= __('nav_admin_panel', 'Admin Panel') ?></a></li>
+                                <li><a class="dropdown-item" href="<?= BASE_URL ?>admin/vendors.php"><i class="fa-solid fa-store me-2"></i><?= __('nav_vendors_approvals', 'Vendors & Approvals') ?></a></li>
+                                <li><a class="dropdown-item" href="<?= BASE_URL ?>admin/products.php"><i class="fa-solid fa-boxes-stacked me-2"></i><?= __('nav_products_catalog', 'Products Catalog') ?></a></li>
+                                <li><a class="dropdown-item" href="<?= BASE_URL ?>admin/categories.php"><i class="fa-solid fa-tags me-2"></i><?= __('nav_categories', 'Categories') ?></a></li>
+                                <li><a class="dropdown-item" href="<?= BASE_URL ?>admin/orders.php"><i class="fa-solid fa-cart-flatbed me-2"></i><?= __('nav_system_orders', 'System Orders') ?></a></li>
+                                <li><a class="dropdown-item" href="<?= BASE_URL ?>admin/complaints.php"><i class="fa-solid fa-triangle-exclamation me-2"></i><?= __('nav_complaints', 'Complaints & GIS') ?></a></li>
                             <?php elseif (hasRole('vendor')): ?>
-
-                                <li>
-                                    <a class="dropdown-item fw-semibold text-primary" href="<?= BASE_URL ?>vendor/dashboard.php">
-                                        <i class="fa-solid fa-shop me-2"></i>Vendor Dashboard
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="<?= BASE_URL ?>vendor/products.php">
-                                        <i class="fa-solid fa-box-open me-2"></i>My Products
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="<?= BASE_URL ?>vendor/orders.php">
-                                        <i class="fa-solid fa-truck-ramp-box me-2"></i>Received Orders
-                                    </a>
-                                </li>
-
-                            <!-- CUSTOMER -->
+                                <li><a class="dropdown-item fw-semibold text-primary" href="<?= BASE_URL ?>vendor/dashboard.php"><i class="fa-solid fa-chart-line me-2"></i><?= __('nav_vendor_dashboard', 'Vendor Dashboard') ?></a></li>
+                                <li><a class="dropdown-item" href="<?= BASE_URL ?>vendor/products.php"><i class="fa-solid fa-box-open me-2"></i><?= __('nav_my_products', 'My Products') ?></a></li>
+                                <li><a class="dropdown-item" href="<?= BASE_URL ?>vendor/add-product.php"><i class="fa-solid fa-plus-circle me-2"></i><?= __('nav_add_product', 'Add Product') ?></a></li>
+                                <li><a class="dropdown-item" href="<?= BASE_URL ?>vendor/orders.php"><i class="fa-solid fa-truck-ramp-box me-2"></i><?= __('nav_received_orders', 'Received Orders') ?></a></li>
+                                <li><a class="dropdown-item" href="<?= BASE_URL ?>vendor/license.php"><i class="fa-solid fa-award me-2"></i><?= __('nav_digital_license', 'Digital Business License') ?></a></li>
                             <?php else: ?>
-
-                                <li>
-                                    <a class="dropdown-item" href="<?= BASE_URL ?>orders.php">
-                                        <i class="fa-solid fa-box me-2"></i>My Orders
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a class="dropdown-item" href="<?= BASE_URL ?>transactions.php">
-                                        <i class="fa-solid fa-receipt me-2"></i>Transaction History
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a class="dropdown-item" href="<?= BASE_URL ?>applications.php">
-                                        <i class="fa-solid fa-file-lines me-2"></i>My Gov Applications
-                                    </a>
-                                </li>
-
+                                <li><a class="dropdown-item" href="<?= BASE_URL ?>orders.php"><i class="fa-solid fa-box me-2"></i><?= __('nav_orders', 'My Orders') ?></a></li>
+                                <li><a class="dropdown-item" href="<?= BASE_URL ?>complaints.php"><i class="fa-solid fa-triangle-exclamation me-2"></i><?= __('nav_my_complaints', 'My Complaints') ?></a></li>
+                                <li><a class="dropdown-item" href="<?= BASE_URL ?>applications.php"><i class="fa-solid fa-file-lines me-2"></i><?= __('nav_applications', 'My Applications') ?></a></li>
                             <?php endif; ?>
 
-
-                            <!-- PROFILE -->
-                            <li>
-
-                                <a
-                                    class="dropdown-item"
-                                    href="<?= BASE_URL ?>profile.php">
-
-                                    <i class="fa-solid fa-user-gear me-2"></i>
-
-                                    Edit Profile
-
-                                </a>
-
-                            </li>
-
-
-                            <!-- DIVIDER -->
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-
-
-                            <!-- LOGOUT -->
-                            <li>
-
-                                <a
-                                    class="dropdown-item text-danger fw-semibold"
-                                    href="<?= BASE_URL ?>logout.php">
-
-                                    <i class="fa-solid fa-right-from-bracket me-2"></i>
-
-                                    Logout
-
-                                </a>
-
-                            </li>
-
+                            <li><a class="dropdown-item" href="<?= BASE_URL ?>profile.php"><i class="fa-solid fa-user-gear me-2"></i><?= __('nav_profile', 'Profile Settings') ?></a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger fw-semibold" href="<?= BASE_URL ?>logout.php"><i class="fa-solid fa-right-from-bracket me-2"></i><?= __('nav_logout', 'Logout') ?></a></li>
                         </ul>
-
                     </div>
-
-
                 <?php else: ?>
-
-
-                    <!-- LOGIN -->
-                    <a
-                        href="<?= BASE_URL ?>login.php"
-                        class="btn btn-outline-light btn-sm"
-                        data-i18n="login">
-
-                        Login
-
-                    </a>
-
-
-                    <!-- REGISTER -->
-                    <a
-                        href="<?= BASE_URL ?>register.php"
-                        class="btn btn-warning btn-sm text-dark fw-bold"
-                        data-i18n="register">
-
-                        Register
-
-                    </a>
-
-
+                    <a href="<?= BASE_URL ?>login.php" class="btn btn-outline-light btn-sm fw-semibold"><?= __('nav_login', 'Login') ?></a>
+                    <a href="<?= BASE_URL ?>register.php" class="btn btn-warning btn-sm text-dark fw-bold"><?= __('nav_register', 'Register') ?></a>
                 <?php endif; ?>
-
             </div>
-
         </div>
-
     </div>
-
 </nav>

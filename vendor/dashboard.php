@@ -56,14 +56,14 @@ $recentOrders = $recentOrdersStmt->fetchAll();
 
         <div class="col-lg-9">
             <!-- Header Banner -->
-            <div class="card card-custom p-4 bg-dark text-white mb-4 border-0 shadow-sm" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);">
-                <div class="d-flex justify-content-between align-items-center">
+            <div class="card p-4 text-white mb-4 border-0 shadow-sm" style="background: var(--dark-blue); border-left: 5px solid var(--primary-red) !important;">
+                <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
                     <div>
-                        <h3 class="fw-bold mb-1"><i class="fa-solid fa-shop text-warning me-2"></i><?= sanitize($vendor['business_name']) ?></h3>
-                        <p class="mb-0 text-secondary"><?= sanitize($vendor['business_type']) ?> | <?= sanitize($vendor['municipality']) ?>, <?= sanitize($vendor['district']) ?></p>
+                        <h3 class="fw-bold mb-1"><i class="fa-solid fa-store text-warning me-2"></i><?= sanitize($vendor['business_name']) ?></h3>
+                        <p class="mb-0 text-white-50"><?= sanitize($vendor['business_type']) ?> | <?= sanitize($vendor['municipality']) ?>, <?= sanitize($vendor['district']) ?></p>
                     </div>
-                    <?php if ($vendor['status'] === 'Approved'): ?>
-                        <span class="badge bg-success px-3 py-2 fs-6"><i class="fa-solid fa-circle-check me-1"></i>Approved Seller</span>
+                    <?php if (in_array($vendor['status'], ['Approved', 'Verified'])): ?>
+                        <span class="badge bg-success px-3 py-2 fs-6"><i class="fa-solid fa-circle-check me-1"></i>Verified Seller</span>
                     <?php else: ?>
                         <span class="badge bg-warning text-dark px-3 py-2 fs-6"><i class="fa-solid fa-clock me-1"></i><?= sanitize($vendor['status']) ?></span>
                     <?php endif; ?>

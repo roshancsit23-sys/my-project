@@ -2,25 +2,31 @@
 // SmartGov Market - Vendor Digital License Display & Printable Certificate
 // File: vendor/license.php
 
-$pageTitle = "Digital Business License";
-require_once __DIR__ . '/../includes/header.php';
+require_once __DIR__ . '/../config/app.php';
+require_once __DIR__ . '/../config/database.php';
+require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../includes/license_generator.php';
+
 requireRole('vendor');
 
 $db = getDBConnection();
 $user_id = $_SESSION['user_id'];
 
-$vStmt = $db->prepare("SELECT id, business_name FROM vendors WHERE user_id = ?");
+$vStmt = $db->prepare("SELECT id, business_name, status FROM vendors WHERE user_id = ?");
 $vStmt->execute([$user_id]);
 $vendor = $vStmt->fetch();
 
 $license = $vendor ? getVendorLicense($vendor['id']) : null;
 
+// Process renewal action BEFORE header.php
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'request_renewal' && $license) {
     requestLicenseRenewal($license['id']);
-    setFlashMessage('success', 'License renewal request submitted to government officers.');
+    setFlashMessage('success', '✓ License renewal request submitted to government officers.');
     redirect('vendor/license.php');
 }
+
+$pageTitle = "Digital Business License";
+require_once __DIR__ . '/../includes/header.php';
 ?>
 
 <div class="container py-4">
@@ -36,9 +42,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
                         <i class="fa-solid fa-award fs-1"></i>
                     </div>
                     <h4 class="fw-bold">Digital Business License Not Available</h4>
-                    <p class="text-muted">Your vendor application has not been approved yet. Once verified by government officers, your digital license certificate with QR code will appear here.</p>
+                    <p class="text-muted">Your vendor account is currently <strong><?= sanitize($vendor['status'] ?? 'Pending') ?></strong>. Once verified by government administration, your official digital business license certificate and QR code will appear here.</p>
                     <div>
-                        <a href="<?= BASE_URL ?>vendor/application.php" class="btn btn-primary fw-bold px-4">Go to Vendor Application</a>
+                        <a href="<?= BASE_URL ?>vendor/dashboard.php" class="btn btn-primary fw-bold px-4">Go to Vendor Dashboard</a>
                     </div>
                 </div>
             <?php else: ?>
@@ -63,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
                     </div>
                 <?php endif; ?>
 
-                <div class="d-flex justify-content-between align-items-center mb-3 no-print">
+                <div class="d-flex justify-content-between align-items-center mb-3 no-print flex-wrap gap-2">
                     <h4 class="fw-bold mb-0"><i class="fa-solid fa-award text-success me-2"></i>Digital Business License</h4>
                     <div>
                         <button onclick="window.print()" class="btn btn-primary fw-bold shadow-sm me-2"><i class="fa-solid fa-print me-1"></i>Print Certificate</button>
@@ -73,8 +79,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 
                 <!-- Printable Certificate Container -->
                 <div class="printable-area">
-                    <div class="license-certificate shadow-lg">
-                        <div class="text-center license-header">
+                    <div class="license-certificate shadow-lg p-4 p-md-5 rounded-4 bg-white border border-2 border-primary border-opacity-25">
+                        <div class="text-center license-header pb-4 border-bottom mb-4">
                             <div class="d-flex justify-content-center align-items-center gap-3 mb-2">
                                 <i class="fa-solid fa-building-columns text-primary fs-1"></i>
                                 <div>
@@ -103,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
                                     </tr>
                                     <tr>
                                         <td class="fw-bold text-muted">Business Category / Type:</td>
-                                        <td><?= sanitize($license['business_type']) ?></td>
+                                        <td><span class="badge bg-light text-dark border"><?= sanitize($license['business_type']) ?></span></td>
                                     </tr>
                                     <tr>
                                         <td class="fw-bold text-muted">Registered Address:</td>
@@ -115,22 +121,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
                                     </tr>
                                     <tr>
                                         <td class="fw-bold text-muted">Date of Issue:</td>
-                                        <td><?= sanitize($license['issue_date']) ?></td>
+                                        <td><?= date('F d, Y', strtotime($license['issue_date'])) ?></td>
                                     </tr>
                                     <tr>
                                         <td class="fw-bold text-muted">Expiration Date:</td>
-                                        <td class="fw-bold text-danger"><?= sanitize($license['expiry_date']) ?></td>
+                                        <td class="fw-bold text-success"><?= date('F d, Y', strtotime($license['expiry_date'])) ?></td>
                                     </tr>
                                 </table>
                             </div>
 
                             <div class="col-md-4 text-center">
-                                <div class="qr-placeholder mx-auto d-flex flex-column align-items-center justify-content-center bg-light">
-                                    <div id="qrcode-canvas" class="mb-1"></div>
-                                    <small class="text-muted fw-bold" style="font-size: 0.65rem;">SCAN TO VERIFY</small>
-                                </div>
-                                <div class="mt-3">
-                                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=<?= urlencode(BASE_URL . "verify.php?license_no=" . $license['license_no']) ?>" alt="QR Code" class="img-fluid rounded border p-1" style="max-width: 130px;">
+                                <div class="p-3 bg-light rounded-3 border d-inline-block shadow-sm">
+                                    <div id="vendor-cert-qr" style="width: 140px; height: 140px; margin: 0 auto;"></div>
+                                    <small class="text-muted d-block mt-2 fw-semibold" style="font-size: 0.75rem;">SCAN TO VERIFY</small>
                                 </div>
                             </div>
                         </div>
@@ -147,6 +150,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
                         </div>
                     </div>
                 </div>
+
+                <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    const qrEl = document.getElementById('vendor-cert-qr');
+                    if (qrEl) {
+                        const verifyUrl = "<?= BASE_URL ?>verify.php?license_no=<?= urlencode($license['license_no']) ?>";
+                        if (typeof QRCode !== 'undefined') {
+                            new QRCode(qrEl, {
+                                text: verifyUrl,
+                                width: 140,
+                                height: 140,
+                                colorDark: "#0b1d3a",
+                                colorLight: "#ffffff",
+                                correctLevel: QRCode.CorrectLevel.H
+                            });
+                        } else {
+                            qrEl.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=${encodeURIComponent(verifyUrl)}" width="140" height="140" alt="QR Code">`;
+                        }
+                    }
+                });
+                </script>
             <?php endif; ?>
         </div>
     </div>

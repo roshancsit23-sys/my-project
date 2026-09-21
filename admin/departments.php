@@ -2,8 +2,10 @@
 // SmartGov Market - Admin Departments Management
 // File: admin/departments.php
 
-$pageTitle = "Departments Management";
-require_once __DIR__ . '/../includes/header.php';
+require_once __DIR__ . '/../config/app.php';
+require_once __DIR__ . '/../config/database.php';
+require_once __DIR__ . '/../includes/auth.php';
+
 requireRole('admin');
 
 $db = getDBConnection();
@@ -23,6 +25,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
         redirect('admin/departments.php');
     }
 }
+
+$pageTitle = "Departments Management";
+require_once __DIR__ . '/../includes/header.php';
 
 $departments = $db->query("SELECT * FROM departments ORDER BY id ASC")->fetchAll();
 ?>

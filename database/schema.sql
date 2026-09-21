@@ -144,6 +144,7 @@ CREATE TABLE IF NOT EXISTS `service_applications` (
     `user_id` INT NOT NULL,
     `status` ENUM('Submitted', 'Processing', 'Approved', 'Rejected') DEFAULT 'Submitted',
     `remarks` TEXT,
+    `document_path` VARCHAR(255) NULL,
     `submitted_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (`service_id`) REFERENCES `government_services`(`id`) ON DELETE CASCADE,

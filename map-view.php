@@ -15,14 +15,14 @@ if ($filterType === 'all' || $filterType === 'vendor') {
     $vendors = $db->query("SELECT v.*, l.license_no 
                            FROM vendors v 
                            LEFT JOIN licenses l ON v.id = l.vendor_id AND l.status = 'VALID' 
-                           WHERE v.status = 'Approved'")->fetchAll();
+                           WHERE v.status IN ('Approved', 'Verified')")->fetchAll();
     foreach ($vendors as $v) {
         $locations[] = [
             'lat' => (float)$v['latitude'],
             'lng' => (float)$v['longitude'],
             'title' => $v['business_name'],
             'address' => $v['address'] . ', ' . $v['municipality'],
-            'category' => 'Approved Vendor (' . ($v['license_no'] ?: 'Licensed') . ')',
+            'category' => 'Verified Vendor (' . ($v['license_no'] ?: 'Licensed') . ')',
             'type' => 'vendor',
             'link' => BASE_URL . 'products.php?vendor=' . $v['id']
         ];
@@ -37,7 +37,7 @@ if ($filterType === 'all' || $filterType === 'complaint') {
             'lat' => (float)$c['latitude'],
             'lng' => (float)$c['longitude'],
             'title' => 'Complaint: ' . $c['complaint_no'],
-            'address' => $c['description'],
+            'address' => $c['location_address'] ?: $c['description'],
             'category' => 'Grievance (' . $c['status'] . ')',
             'type' => 'complaint',
             'link' => BASE_URL . 'complaint-details.php?id=' . $c['id']

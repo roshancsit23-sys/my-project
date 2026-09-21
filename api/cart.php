@@ -36,7 +36,7 @@ if ($action === 'add') {
     $pStmt->execute([$product_id]);
     $product = $pStmt->fetch();
     
-    if (!$product || $product['status'] !== 'Active' || $product['vendor_status'] !== 'Approved') {
+    if (!$product || $product['status'] !== 'Active' || !in_array($product['vendor_status'], ['Approved', 'Verified'], true)) {
         setFlashMessage('danger', 'Product is currently unavailable.');
         redirect('products.php');
     }

@@ -128,7 +128,7 @@ require_once __DIR__ . '/includes/header.php';
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label fw-semibold">Location / Address</label>
-                                    <input type="text" name="location_address" class="form-control" placeholder="e.g. Baneshwor Height, Ward 10">
+                                    <input type="text" name="location_address" id="location_address" class="form-control" placeholder="e.g. Baneshwor Height, Ward 10">
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label fw-semibold">Evidence Attachment (Image / PDF)</label>
@@ -136,10 +136,17 @@ require_once __DIR__ . '/includes/header.php';
                                 </div>
                             </div>
 
-                            <!-- Map location pin selection -->
+                            <!-- Map location pin selection with GPS Auto-detect -->
                             <div class="mb-3">
-                                <label class="form-label fw-semibold text-danger"><i class="fa-solid fa-map-pin me-1"></i>Incident GIS Map Location (Click or Drag Pin)</label>
-                                <div id="map" style="height:200px;" class="rounded border"></div>
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <label class="form-label fw-semibold text-danger mb-0">
+                                        <i class="fa-solid fa-map-pin me-1"></i>Incident GIS Map Location (Click or Drag Pin)
+                                    </label>
+                                    <button type="button" class="btn btn-xs btn-outline-danger fw-bold" onclick="useCurrentLocation('lat-input', 'lng-input', 'location_address')">
+                                        <i class="fa-solid fa-crosshairs me-1"></i>Detect Current GPS Location
+                                    </button>
+                                </div>
+                                <div id="map" style="height:220px;" class="rounded border"></div>
                                 <input type="hidden" name="latitude" id="lat-input" value="27.7172">
                                 <input type="hidden" name="longitude" id="lng-input" value="85.3240">
                             </div>
@@ -201,7 +208,7 @@ require_once __DIR__ . '/includes/header.php';
 document.addEventListener('DOMContentLoaded', () => {
     const mapEl = document.getElementById('map');
     if (mapEl) {
-        initLocationPicker('map', 'lat-input', 'lng-input', 27.7172, 85.3240);
+        initLocationPicker('map', 'lat-input', 'lng-input', 27.7172, 85.3240, 'location_address');
     }
 });
 </script>

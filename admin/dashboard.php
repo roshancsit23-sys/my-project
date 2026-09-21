@@ -11,8 +11,8 @@ $db = getDBConnection();
 // Real Database Metrics (NO HARDCODED NUMBERS)
 $totalUsers = $db->query("SELECT COUNT(*) FROM users")->fetchColumn();
 $totalVendors = $db->query("SELECT COUNT(*) FROM vendors")->fetchColumn();
-$approvedVendors = $db->query("SELECT COUNT(*) FROM vendors WHERE status='Approved'")->fetchColumn();
-$pendingVendors = $db->query("SELECT COUNT(*) FROM vendor_applications WHERE status IN ('Submitted','Under Review')")->fetchColumn();
+$approvedVendors = $db->query("SELECT COUNT(*) FROM vendors WHERE status IN ('Approved', 'Verified')")->fetchColumn();
+$pendingVendors = $db->query("SELECT COUNT(*) FROM vendors WHERE status='Pending'")->fetchColumn();
 $totalProducts = $db->query("SELECT COUNT(*) FROM products")->fetchColumn();
 $totalOrders = $db->query("SELECT COUNT(*) FROM orders")->fetchColumn();
 $totalSalesRevenue = $db->query("SELECT COALESCE(SUM(total_amount), 0) FROM orders WHERE payment_status='Paid'")->fetchColumn();
@@ -43,11 +43,11 @@ foreach ($cmpQuery as $cp) { $cmpLabels[] = $cp['category']; $cmpData[] = (int)$
 
         <div class="col-lg-9">
             <!-- Admin Header -->
-            <div class="card card-custom p-4 bg-dark text-white mb-4 border-0 shadow-sm" style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);">
-                <div class="d-flex justify-content-between align-items-center">
+            <div class="card p-4 text-white mb-4 border-0 shadow-sm" style="background: var(--dark-blue); border-left: 5px solid var(--primary-red) !important;">
+                <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
                     <div>
-                        <h3 class="fw-bold mb-1"><i class="fa-solid fa-gauge-high text-warning me-2"></i>Master Administration Console</h3>
-                        <p class="mb-0 text-secondary">Real-time database metrics, role controls, vendor licensing & municipal oversight.</p>
+                        <h3 class="fw-bold mb-1"><i class="fa-solid fa-building-columns text-warning me-2"></i>HATIYA Administration Console</h3>
+                        <p class="mb-0 text-white-50">Real-time database metrics, merchant approvals, digital licensing &amp; municipal oversight.</p>
                     </div>
                     <span class="badge bg-danger px-3 py-2 fs-6">SUPER ADMIN</span>
                 </div>

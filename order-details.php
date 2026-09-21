@@ -91,7 +91,7 @@ $payment = $payStmt->fetch();
                                 <tr>
                                     <td>
                                         <div class="d-flex align-items-center gap-2">
-                                            <img src="<?= BASE_URL . ($it['image_path'] ? $it['image_path'] : 'assets/css/product-default.jpg') ?>" onerror="this.src='https://via.placeholder.com/50';" class="rounded border" width="45" height="45" style="object-fit:cover;">
+                                            <img src="<?= BASE_URL . ($it['image_path'] ? $it['image_path'] : 'assets/images/product-default.svg') ?>" onerror="this.onerror=null;this.src='<?= BASE_URL ?>assets/images/product-default.svg';" class="rounded border" width="45" height="45" style="object-fit:cover;">
                                             <span class="fw-bold text-dark"><?= sanitize($it['product_name']) ?></span>
                                         </div>
                                     </td>
